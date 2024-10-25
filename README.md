@@ -12,7 +12,7 @@
 
 ### Requirements (Matlab Versions)
 
-The code was tested using Matlab R2019b, R2021a, and R2024a.
+The code was tested using Matlab R2019b, R2021a, R2023a, R2023b, and R2024a.
 
 
 ---
