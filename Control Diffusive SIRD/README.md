@@ -14,6 +14,8 @@ $$
 
 ---
 
+## Main files
+
 [`FISTA_DiffusiveSIR_nb.mlx`](FISTA_DiffusiveSIR_nb.mlx) runs FISTA and determines a pair of controls.
 
 [`Forward_Diffusive_SIR.m`](Forward_Diffusive_SIR.m) computes the forward system and returns the vector field $\rho(x;t)$. It has an option for plotting. A simplified version is included in [`State.m`](State.m).
