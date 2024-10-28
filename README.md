@@ -7,7 +7,11 @@
 ### How do I run tests? ###
  
 1. Please run [`AddPaths.m`](AddPaths.m) in the main folder. 
-2. Run any file in this folder.
+2. Run any file in one of the following folders:
+
+[`Control Diffusive SIRD`](Control%20Diffusive%20SIRD): Parameter learning for diffusive SIRD.
+
+[`Control DDFT SIRD`](Control%20DDFT%20SIRD): Discovering nonpharmaceutical controls for the SIRD–DDFT model.
 
 
 ### Requirements (Matlab Versions)
