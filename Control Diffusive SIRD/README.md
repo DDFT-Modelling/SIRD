@@ -13,8 +13,7 @@ $$
 $$
 
 ---
-
-## Main files
+## Main files
 
 [`FISTA_DiffusiveSIR_nb.mlx`](FISTA_DiffusiveSIR_nb.mlx) runs FISTA and determines a pair of controls.
 
@@ -24,7 +23,7 @@ $$
 
 [`InitialCondition.m`](InitialCondition.m) contains three different initial conditions, can be selected using the keyword `choice`.
 
-[`Objective.m`](Objective.m) evaluates the objective $j(\alpha) = \| \rho - \widehat{\rho} \|$.
+[`Objective.m`](Objective.m) evaluates the objective $j(\alpha) = \frac{1}{2} \| \rho - \widehat{\rho}\|^2$.
 
 [`Gradient.m`](Gradient.m) evaluates $\nabla j(\alpha)$.
 
