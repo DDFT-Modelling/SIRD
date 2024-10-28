@@ -32,6 +32,10 @@ $$
 
 [`Adjoint.m`](Adjoint.m) returns the vector field $q(x;t)$ from terminal data, $\rho(x;t)$, and parameters.
 
+[`Objective.m`](Objective.m) evaluates the objective $j(\alpha) = \frac{1}{2} \| \rho - \widehat{\rho}\|^2 + \frac{\theta}{2} \|\alpha\|^2 $.
+
+[`Gradient.m`](Gradient.m) evaluates $\nabla j(\alpha)$.
+
 
 ---
 
