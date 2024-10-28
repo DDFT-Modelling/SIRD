@@ -15,9 +15,9 @@
 
 [`FISTA_DiffusiveSIR_nb.mlx`](FISTA_DiffusiveSIR_nb.mlx) runs FISTA and determines a pair of controls.
 
-[`Forward_SIRD.m`] computes the forward system and returns the vector field $\rho(x;t)$. It has an option for plotting. A simplified version is included in [`State.m`](State.m).
+[`Forward_Diffusive_SIR.m`](Forward_Diffusive_SIR.m) computes the forward system and returns the vector field $\rho(x;t)$. It has an option for plotting. A simplified version is included in [`State.m`](State.m).
 
-[`Adjoint_Diffusive_SIR.m`] computes the adjoint system and returns the vector field $q(x;t)$. It has an option for plotting. A simplified version is included in [`Adjoint.m`](Adjoint.m).
+[`Adjoint_Diffusive_SIR.m`](Adjoint_Diffusive_SIR.m) computes the adjoint system and returns the vector field $q(x;t)$. It has an option for plotting. A simplified version is included in [`Adjoint.m`](Adjoint.m).
 
 [`InitialCondition.m`](InitialCondition.m) contains three different initial conditions, can be selected using the keyword `choice`.
 
