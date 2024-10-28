@@ -28,3 +28,14 @@ $$
 
 [`Adjoint.m`](Adjoint.m) returns the vector field $q(x;t)$ from terminal data, $\rho(x;t)$, and parameters.
 
+
+---
+
+## Outputs
+
+[`Panels_Plot.m`](Panels_Plot.m) returns a density plot at user selected times.
+
+[`plots_in_box.m`](plots_in_box.m) generates an animation for a vector field of dimension 3.
+
+[`Plot_SIR_Mean_Curves.m`](Plot_SIR_Mean_Curves.m) aggregates each compartment in space and plots it.
+
