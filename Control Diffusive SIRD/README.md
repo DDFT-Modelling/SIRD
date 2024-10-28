@@ -1,15 +1,16 @@
 # Parameter identification for the diffusive SIR model
 
-
-\begin{align*}
-	\rho &= \big( \begin{small matrix} S \\ I \\ R \end{smallmatrix} \big)
+$$
+\begin{align}
+	\rho &= \big( \begin{smallmatrix} S \\ I \\ R \end{smallmatrix} \big)
 	\\
-	\frac{\partial S}{\partial t} &= D \Delta S - cSI
+	\frac{\partial S}{\partial t} &= D \Delta S - \beta SI
 	\\
-	\frac{\partial I}{\partial t} &= D \Delta I + cSI - wI
+	\frac{\partial I}{\partial t} &= D \Delta I + \beta SI - \gamma I
 	\\
-	\frac{\partial R}{\partial t} &= D \Delta R + wI
-\end{align*}
+	\frac{\partial R}{\partial t} &= D \Delta R + \gamma I
+\end{align}
+$$
 
 ---
 
