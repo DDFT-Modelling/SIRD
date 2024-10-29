@@ -27,28 +27,21 @@ pd_I = zeros(aLine.N,10);
 
 
 
+Colours = [ [0, 0.4470, 0.7410]; [0.8500, 0.3250, 0.0980]; 
+            [0.9290, 0.6940, 0.1250]; [0.4940, 0.1840, 0.5560]; 
+            [0.3010, 0.7450, 0.9330]; [0.6350, 0.0780, 0.1840] ]';
 
 
+Tiks = [1e-4, 1e-2, 1e-0, 1e+1, 1e+2, 1e+3, 1e+4, 1e+5, 1e+6, 1e+7];
 
-Facts = [[10], 9:-1:1];
-%Facts = [10,8,6,4,2,1];
-
-%% Optimisation process
-%------------------------------------------
-%------------------------------------------
+%% Optimisation
 for index = 1:10
-
-
-fact    = Facts(index);
+fact    = 10;
 Box_Lim = fact * D;
+tik = Tiks(index);
+tik
 
-% Determine bounds and define projection
-lb   = -Box_Lim;
-ub   = min(Box_Lim, 10*D);                          %!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-Proj = @(x) min( max(x,lb), ub);
-
-
-%Proj = @(x) min( max(x,-Box_Lim), Box_Lim);
+Proj = @(x) min( max(x,-Box_Lim), Box_Lim);
 %Now we can write a code for the algorithm:
 Nb_Its = 100;       % Number of iterations
 critical = 1;      % Report status after this number of iterations
@@ -230,7 +223,6 @@ disp(strcat( repmat('–',1,75) ))
 fprintf('\nNorm of inactive gradient ᶦ‖df(αₖ)‖ ≈ ᶦ‖df(ωₖ)‖ = %.3e.\n\n', dnIn(it) )
 fprintf('\nAlgorithm stopped after %.4f seconds and %.0f iterations.\n\n', ...
     [time(it+1),it])
-
     
 
 
@@ -240,8 +232,8 @@ P(:,index,2) = p(:,2);
 pd_I(:,index) = Int_Spatial * State_p(:,maskI)'/N_T;
 
 end
-%------------------------------------------
-%------------------------------------------
+
+
 
 
 
@@ -255,7 +247,7 @@ figure(200)
 % Axes
 h_u = subplot(1,2,1);    h_v = subplot(1,2,2);
 
-indices = [1,3,5,7,9,10];
+indices = [1,3,4,5,6,8];
 % Plot u
 axes(h_u)
 hCurves_u = plot(outTimes, P(:,indices,1),'linewidth', 1.5);
@@ -273,10 +265,13 @@ title('$v(t)$ - Self-isolation','Interpreter','latex','fontsize',15)
 xlabel('Time $t$','Interpreter','latex','fontsize',12);
 
 % Set transparency
-for index = 1:6
+for index = 1:5
     if index ~= 1
-        hCurves_u(index).Color = [hCurves_u(index).Color, 0.3];
-        hCurves_v(index).Color = [hCurves_v(index).Color, 0.3];
+        hCurves_u(index).Color = [Colours(:,index)', 0.3];
+        hCurves_v(index).Color = [Colours(:,index)', 0.3];
+    else
+        hCurves_u(index).Color = Colours(:,1)';
+        hCurves_v(index).Color = Colours(:,1)';
     end
 end
 
@@ -285,11 +280,11 @@ grid(h_u,'on');    grid(h_v,'on');
 
 % Legend
 axes(h_u)
-leg = legend(string( Facts(indices)*(-D) ),'Interpreter','latex','Location','NorthEast','fontsize',10);
-title(leg,'$\ell_u$','Interpreter','latex','fontsize',12);
+leg = legend(strcat(num2str(Tiks(indices).', '%.e')),'Interpreter','latex','Location','NorthEast','fontsize',10);
+title(leg,'$\theta$','Interpreter','latex','fontsize',12);
 axes(h_v)
-leg = legend(string( Facts(indices)*(-D) ),'Interpreter','latex','Location','NorthEast','fontsize',10);
-title(leg,'$\ell_v$','Interpreter','latex','fontsize',12);
+leg = legend(strcat(num2str(Tiks(indices).', '%.e')),'Interpreter','latex','Location','NorthEast','fontsize',10);
+title(leg,'$\theta$','Interpreter','latex','fontsize',12);
 
 % position
 h_u(1).Position = [ 0.13    0.11    0.36    0.75];
@@ -298,7 +293,7 @@ h_v(1).Position = [ 0.53    0.11    0.36    0.75];
 sgtitle('Optimal interaction strengths','Interpreter','latex','FontSize',17)
 
 
-exportgraphics(figure(200), strcat('Optimised_Controls_',num2str(tik),'.pdf'), 'BackgroundColor','none','ContentType','vector')
+exportgraphics(figure(200), strcat('Optimised_Controls_D=',num2str(fact),'.pdf'), 'BackgroundColor','none','ContentType','vector')
 hold off
 
 
@@ -309,7 +304,7 @@ hold off
 % Effect in infected
 
 % Select subvalues for zoom
-sub_outTimes_Bool = (outTimes <= 25) & (outTimes >= 12);
+sub_outTimes_Bool = (outTimes <= 25) & (outTimes >= 11);
 subTimes = outTimes( sub_outTimes_Bool );
 sub_pd_I = pd_I(sub_outTimes_Bool,: );
 % Integrate infected without control
@@ -330,14 +325,16 @@ ylabel('Infected population','Interpreter','latex','fontsize',12);
 title('Evolution of infected by strategy','Interpreter','latex','fontsize',17)
 hold off
 
-for index = 1:6
+for index = 1:5
     if index ~= 1
-        hCurves_pd_I(index).Color = [hCurves_pd_I(index).Color, 0.3];
+        hCurves_pd_I(index).Color = [Colours(:,index)', 0.3];
+    else
+        hCurves_pd_I(index).Color = Colours(:,1)';
     end
 end
 % Legend
-leg = legend(string( Facts(indices)*(-D) ),'Interpreter','latex','Location','NorthEast','fontsize',10);
-title(leg,'$\ell$','Interpreter','latex','fontsize',12);
+leg = legend( strcat(num2str(Tiks(indices).', '%.e')),'Interpreter','latex','Location','NorthEast','fontsize',10);
+title(leg,'$\theta$','Interpreter','latex','fontsize',12);
 
 % Zoomed box
 A2 = axes('position',[.3 .5 .4 .4 ]);
@@ -346,9 +343,11 @@ sub_hCurves_pd_I = plot(subTimes, sub_pd_I(:,indices),'linewidth', 1.5);
 hold on
 plot(subTimes, sub_I_No_uv, 'Color','black', 'LineStyle', '--')
 
-for index = 1:6
+for index = 1:5
     if index ~= 1
-        sub_hCurves_pd_I(index).Color = [sub_hCurves_pd_I(index).Color, 0.3];
+        sub_hCurves_pd_I(index).Color = [Colours(:,index)', 0.3];
+    else
+        hCurves_pd_I(index).Color = Colours(:,1)';
     end
 end
 
@@ -364,29 +363,29 @@ annotation('rectangle',[0.324,0.169,0.19,0.13], 'Color', [0.5,0.5,0.5])
 annotation('arrow',[0.4179 0.4179+0.042], [0.321 0.321+0.0986], 'Color', [0.5,0.5,0.5])
 
 % Store plot
-exportgraphics(figure(300), strcat('Optimised_Infected_',num2str(tik),'.pdf'), 'BackgroundColor','none','ContentType','vector')
-
+exportgraphics(figure(300), strcat('Optimised_Infected_D=',num2str(fact),'.pdf'), 'BackgroundColor','none','ContentType','vector')
 
 
 %% Store data
 
-save('store_Box_uv.mat','P');
-save('store_Box_I.mat','pd_I');
-
-%
-P = matfile('store_Box_uv.mat').P;
-pd_I = matfile('store_Box_I.mat').pd_I;
+save('store_Tik_uv.mat','P');
+save('store_Tik_I.mat','pd_I');
 
 
+P = matfile('store_Tik_uv.mat').P;
+pd_I = matfile('store_Tik_I.mat').pd_I;
 
 
 
-%% Plot densities
-State_p   = State(P(:,1,1),P(:,1,2), rho_ic, dims, aLine, Conv, Diff, tols);    % Plot 10D: the box is bounded by 10 times the absolute value of diffusion
-% Plot gif
-plots_in_box(State_p,  N_T, maskS,maskI,maskR, box,outTimes,Int_Spatial)
-% Plot aggregated compartments
-Plot_SIR_Mean_Curves
+
+
+
+
+
+
+
+
+
 
 
 % Set colours
