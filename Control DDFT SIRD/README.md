@@ -25,6 +25,7 @@ $$
 
 [`Experiments_Different_Boxes.m`](Experiments_Different_Boxes.m) experiment for different box bounds.
 
+[`Experiments_Different_Regularisation_Levels.m`](Experiments_Different_Regularisation_Levels.m) experiment for different values of the Tikhonov regularisation parameter.
 
 
 
