@@ -21,7 +21,15 @@ $$
 ---
 ## Main files
 
-[`FISTA_SIRD_DDFT_box.mlx`](FISTA_SIRD_DDFT_box.mlx)  runs FISTA and determines a pair of controls.
+[`FISTA_SIRD_DDFT_box.mlx`](FISTA_SIRD_DDFT_box.mlx) runs FISTA and determines a pair of controls.
+
+[`Experiments_Different_Boxes.m`](Experiments_Different_Boxes.m) experiment for different box bounds.
+
+
+
+
+
+## Supplementary files
 
 
 [`InitialCondition.m`](InitialCondition.m) contains three different initial conditions, can be selected using the keyword `choice`.
